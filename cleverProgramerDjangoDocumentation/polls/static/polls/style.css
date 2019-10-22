@@ -1,0 +1,22 @@
+body {
+    background: white url("images/background.JPG") no-repeat;
+    background-size: cover;
+}
+
+ul {
+    display: flex;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+}
