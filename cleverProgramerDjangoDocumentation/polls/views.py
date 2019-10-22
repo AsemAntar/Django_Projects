@@ -21,16 +21,20 @@ class DetailView(generic.DetailView):
     template_name = 'polls/detail.html'
 
     def get_queryset(self):
-        return Question.objects.filter(pub_date__lte=timezone.now())
+        return Question.objects.exclude(choice__isnull=True).filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+    def get_queryset(self):
+        return Question.objects.exclude(choice__isnull=True).filter(pub_date__lte=timezone.now())
+
 
 def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question.objects.exclude(
+        choice__isnull=True), pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
