@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Post
 
 
+# customizing the admin pages
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
