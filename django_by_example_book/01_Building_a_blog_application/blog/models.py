@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from taggit.managers import TaggableManager
+
 
 # adding custom manager
 class PublishedManager(models.Manager):
@@ -46,6 +48,9 @@ class Post(models.Model):
 
     # The custom manager
     published = PublishedManager()
+
+    # add taggable manager
+    tags = TaggableManager()
 
     # tell django to sort posts in descending order relative to publication date
     class Meta:
