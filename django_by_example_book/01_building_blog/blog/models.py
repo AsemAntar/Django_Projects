@@ -34,14 +34,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    # create a url linked to each post with the help of post_detail view to be used in templates
     def get_absolute_url(self):
         return reverse(
-            # view name
-            'blog:post_detail',
-            args=[
-                self.slug,
-                self.publish.year,
-                self.publish.month,
-                self.publish.day,
-            ]
+            'blog:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug]
         )
