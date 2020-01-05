@@ -1,4 +1,5 @@
 from django.urls import path
+from .feeds import LatestPostFeed
 from .views import post_list, post_detail, post_share, PostListView
 
 
@@ -11,4 +12,5 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',
          post_detail, name='post_detail'),
     path('<int:post_id>/share/', post_share, name='post_share'),
+    path('feed/', LatestPostFeed(), name='post_feed'),
 ]
