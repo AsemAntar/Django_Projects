@@ -8,7 +8,7 @@
             Please try again.
         </p>
     {% else %}
-        <p>Please use the following form to Login:</p>
+        <p>Please use the following form to Login. If you don't have an account <a href="{% url 'register' %}">Register Here</a></p>
     {% endif %}
     <div class="login-form">
         <form action="{% url 'login' %}" method="post">
@@ -17,5 +17,6 @@
             <input type="hidden" name="next" value="{{ next }}">
             <p><input type="submit" value="Login"></p>
         </form>
+        <p><a href="{% url "password_reset" %}">Forgotten Your Password?</a></p>
     </div>
 {% endblock content %}
