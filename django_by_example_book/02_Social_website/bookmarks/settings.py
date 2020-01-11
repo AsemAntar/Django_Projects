@@ -13,7 +13,7 @@ SECRET_KEY = '2a7fzp2h&1=2qw+h#@(9knv0)!6tdxgit&1)#i9z&w=ofs5)&n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -106,6 +107,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# add our own authentication
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
@@ -113,3 +121,5 @@ LOGOUT_URL = 'logout'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+SOCIAL_AUTH_FACEBOOK_KEY = '2268677300105040'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'ae8494b89954e42e40e3d8a7c91dd159'
