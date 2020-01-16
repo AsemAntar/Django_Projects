@@ -3,6 +3,6 @@
         myBookmarklet();
     } else {
         document.body.appendChild(document.createElement('script')).src =
-            'https://5b37aa53.ngrok.io/static/js/bookmarklet.js?r=' + Math.floor(Math.random() * 99999999999999999999);
+            'https://6f6ad856.ngrok.io/static/js/bookmarklet.js?r=' + Math.floor(Math.random() * 99999999999999999999);
     }
 })();
