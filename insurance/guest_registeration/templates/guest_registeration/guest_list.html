@@ -1,0 +1,47 @@
+{% extends 'guest_registeration/base.html' %}
+{% block title %}Guest List{% endblock title %}
+{% block content %}
+    <a href="{% url 'guest_registeration:register' %}" class="btn btn-info btn-block mb-3">
+        <i class="fas fa-plus"></i> Add New Guest
+    </a>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Mobile</th>
+            <th>Insurance Company</th>
+            <th>Dispensing Pharmacy</th>
+            <th>Dispensing Date</th>
+            <th>Next Dispensing</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for guest in guest_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'guest_registeration:guest_detail' guest.id %}">
+                            {{ guest.fullname }}
+                        </a>
+                    </td>
+                    <td>{{ guest.mobile }}</td>
+                    <td>{{ guest.insurance_company }}</td>
+                    <td>{{ guest.dispensing_pharmacy }}</td>
+                    <td>{{ guest.dipensing_date|date:"d-m-Y" }}</td>
+                    <td>{{ guest.next_dispensing|date:"d-m-Y" }}</td>
+                    <td>
+                        <a href="{% url 'guest_registeration:guest_update' guest.id %}" class="btn text-secondary">
+                            <i class="far fa-edit fa-lg"></i>
+                        </a>
+                        <form class="d-inline" action="{% url 'guest_registeration:guest_delete' guest.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">
+                                <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

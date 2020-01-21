@@ -1,0 +1,15 @@
+{% extends 'guest_registeration/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Register New Users{% endblock title %}
+{% block content %}
+    <form action="" method="post" autocomplete="off">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
+        {% csrf_token %}
+    </form>
+    <div class="border-top pt-3 mt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="#">Sign In</a>
+        </small>
+    </div>
+{% endblock content %}
