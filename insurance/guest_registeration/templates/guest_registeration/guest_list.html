@@ -11,8 +11,6 @@
             <th>Mobile</th>
             <th>Insurance Company</th>
             <th>Dispensing Pharmacy</th>
-            <th>Dispensing Date</th>
-            <th>Next Dispensing</th>
             <th></th>
         </thead>
         <tbody>
@@ -27,8 +25,6 @@
                     <td>{{ guest.mobile }}</td>
                     <td>{{ guest.insurance_company }}</td>
                     <td>{{ guest.dispensing_pharmacy }}</td>
-                    <td>{{ guest.dipensing_date|date:"d-m-Y" }}</td>
-                    <td>{{ guest.next_dispensing|date:"d-m-Y" }}</td>
                     <td>
                         <a href="{% url 'guest_registeration:guest_update' guest.id %}" class="btn text-secondary">
                             <i class="far fa-edit fa-lg"></i>

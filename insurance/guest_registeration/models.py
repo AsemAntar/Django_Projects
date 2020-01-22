@@ -38,10 +38,8 @@ class Guest(models.Model):
     mobile = PhoneNumberField(verbose_name='Mobile No.')
     insurance_company = models.CharField(
         max_length=30, choices=INSURANCE_COMPANIES, verbose_name='Insurance Company', default='bupa')
-    dipensing_date = models.DateTimeField(
-        verbose_name='Dispensing Date', default=timezone.now)
-    next_dispensing = models.DateTimeField(
-        verbose_name='Next Dispensing Date', default=timezone.now)
+    dipensing_date = models.DateField(verbose_name='Dispensing Date')
+    next_dispensing = models.DateField(verbose_name='Next Dispensing Date')
     dispensing_pharmacy = models.ForeignKey(Pharmacy, on_delete=models.CASCADE)
     dispensing_pharmacist = models.ForeignKey(
         Pharmacist, on_delete=models.DO_NOTHING)

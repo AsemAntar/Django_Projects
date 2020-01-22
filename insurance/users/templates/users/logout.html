@@ -1,0 +1,10 @@
+{% extends 'guest_registeration/base.html' %}
+{% block title %}Logout{% endblock title %}
+{% block content %}
+    <h2>You Have Been Logged Out</h2>
+    <div class="border-top pt-3 mt-3">
+        <small class="text-muted">
+            <a href="{% url 'users:login' %}">Login Again</a>
+        </small>
+    </div>
+{% endblock content %}

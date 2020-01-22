@@ -15,9 +15,42 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
+    <!-- Gijgo for datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css">
+
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'guest_registeration:guest_list' %}">Insurance Reminder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'guest_registeration:guest_list' %}">Guest List <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:login' %}">Login</a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:register_users' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -52,6 +85,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"         
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
         crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"></script>
+
+    <script type="text/javascript">
+        $('#id_dipensing_date').datepicker({
+            uiLibrary: 'bootstrap4', 
+            iconsLibrary: 'fontawesome', 
+            showOtherMonths: true, 
+            calendarWeeks: true, 
+            footer: true,
+            modal: true,
+            header: false
+        });
+
+        $('#id_next_dispensing').datepicker({
+            uiLibrary: 'bootstrap4', 
+            iconsLibrary: 'fontawesome', 
+            showOtherMonths: true, 
+            calendarWeeks: true, 
+            footer: true,
+            modal: true,
+            header: false
+        });
     </script>
 </body>
 </html>
