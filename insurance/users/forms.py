@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from .models import Pharmacist
 
 
 class MyValidator(UnicodeUsernameValidator):
@@ -57,6 +58,20 @@ class CustomRegisterForm(forms.Form):
         super(CustomRegisterForm, self).__init__(*args, **kwargs)
         self.fields['username'].validators.append(MyValidator())
 
+
+class PharmacistForm(forms.ModelForm):
+    class Meta:
+        model = Pharmacist
+        fields = ('name', 'emp_code')
+        labels = {
+            'name': 'Pharmacist Name',
+            'emp_code': 'Employee Code'
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(PharmacistForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['class'] = 'mb-5'
+        # self.fields['emp_code'].widget.attrs['class'] = 'mb-5'
 
 # class UserRegisterForm(UserCreationForm):
 #     email = forms.EmailField()

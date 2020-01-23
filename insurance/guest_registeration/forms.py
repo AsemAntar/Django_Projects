@@ -10,7 +10,7 @@ class GuestRegisterForm(forms.ModelForm):
             'mobile',
             'insurance_company',
             'dispensing_pharmacy',
-            'dispensing_pharmacist',
+            # 'dispensing_pharmacist',
             'dipensing_date',
             'next_dispensing',
         )
@@ -18,5 +18,5 @@ class GuestRegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(GuestRegisterForm, self).__init__(*args, **kwargs)
         self.fields['dispensing_pharmacy'].empty_label = 'Select'
-        self.fields['dispensing_pharmacist'].empty_label = 'Select'
-        self.fields['dispensing_pharmacist'].required = False
+        # self.fields['dispensing_pharmacist'].empty_label = 'Select'
+        # self.fields['dispensing_pharmacist'].required = False

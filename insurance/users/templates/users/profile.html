@@ -1,0 +1,34 @@
+{% extends 'guest_registeration/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{ user.profile }}{% endblock title %}
+{% block content %}
+    <h1>{{ user.profile }}</h1>
+        <form action="" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">{{ form.name|as_crispy_field }}</div>
+                <div class="col-md-6">{{ form.emp_code|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success btn-block">Submit</button> 
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="row">
+            <ul class="list-group">
+                {% for pharmacist in pharmacists %}
+                    <li class="list-group-item">
+                        {{ pharmacist.name }} ({{ pharmacist.emp_code }}) 
+                        <form class="d-inline" action="{% url 'users:pharmacist_delete' pharmacist.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">
+                                <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                            </button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock content %}
