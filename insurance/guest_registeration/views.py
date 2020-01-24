@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import GuestRegisterForm
 from .models import Guest
 
@@ -8,6 +9,7 @@ def guest_list(request):
     return render(request, 'guest_registeration/guest_list.html', context)
 
 
+@login_required
 def guest_register(request, id=0):
     if request.method == 'POST':
         if id == 0:
@@ -27,12 +29,14 @@ def guest_register(request, id=0):
         return render(request, 'guest_registeration/register.html', {'form': form})
 
 
+@login_required
 def guest_delete(request, id):
     guest = Guest.objects.get(pk=id)
     guest.delete()
     return redirect('guest_registeration:guest_list')
 
 
+@login_required
 def guest_detail(request, id):
     context = {'guest': Guest.objects.get(pk=id)}
     return render(request, 'guest_registeration/detail.html', context)

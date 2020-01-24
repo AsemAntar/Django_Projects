@@ -38,6 +38,7 @@ def profile(request):
     return render(request, 'users/profile.html', {'form': form, 'pharmacists': pharmacists})
 
 
+@login_required
 def pharmacist_delete(request, id):
     pharmacist = Pharmacist.objects.filter(working_at=request.user).get(pk=id)
     pharmacist.delete()
