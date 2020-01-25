@@ -3,10 +3,10 @@
 {% block title %}Register New Users{% endblock title %}
 {% block content %}
     <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
         <legend class="border-bottom mb-4">Sign Up</legend>
         {{ form|crispy }}
         <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
-        {% csrf_token %}
     </form>
     <div class="border-top pt-3 mt-3">
         <small class="text-muted">

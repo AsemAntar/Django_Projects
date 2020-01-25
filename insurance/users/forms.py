@@ -7,12 +7,12 @@ from .models import Pharmacist
 
 
 class MyValidator(UnicodeUsernameValidator):
-    regex = r'[0-9]'
+    regex = r'[a-zA-Z]\s-\s[0-9]'
 
 
 class CustomRegisterForm(forms.Form):
-    username = forms.CharField(label='Pharmacy Code', max_length=4, min_length=4,
-                               help_text='Required. 4 characters. Digits only.', error_messages={'required': 'Not Valid'})
+    username = forms.CharField(label='Pharmacy-name & Pahrmacy-Code', max_length=200,
+                               help_text='1- Must be in the form of : pharmacyname - pharmacy code<br/>2- Example:  Alrasheed - 1093', error_messages={'required': 'Example:  Alrasheed - 1093'})
 
     email = forms.EmailField(label='Email', help_text='Enter a valid email')
 
