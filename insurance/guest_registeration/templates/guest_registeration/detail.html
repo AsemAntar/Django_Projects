@@ -114,7 +114,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <form class="d-inline" action="#" method="post">
+                                <form class="d-inline" action="{% url 'guest_registeration:delete_drug' guest.id drug.id %}" method="post">
                                     {% csrf_token %}                            
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>                                        

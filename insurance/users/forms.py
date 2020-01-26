@@ -71,15 +71,3 @@ class PharmacistForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PharmacistForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = 'mb-5'
-        # self.fields['emp_code'].widget.attrs['class'] = 'mb-5'
-
-# class UserRegisterForm(UserCreationForm):
-#     email = forms.EmailField()
-
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password1', 'password2']
-
-#     def __init__(self, *args, **kwargs):
-#         super(UserRegisterForm, self).__init__(*args, **kwargs)
-#         self.fields['username'].required = False

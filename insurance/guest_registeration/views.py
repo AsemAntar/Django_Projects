@@ -59,3 +59,9 @@ def guest_detail(request, id):
     else:
         med_form = MedicationForm()
         return render(request, 'guest_registeration/detail.html', {'guest': guest, 'drugs': drugs, 'med_form': med_form})
+
+
+def delete_drug(request, id, p_id):
+    drug = Medication.objects.get(pk=p_id)
+    drug.delete()
+    return redirect('guest_registeration:guest_detail', id)
