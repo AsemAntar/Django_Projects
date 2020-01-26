@@ -1,11 +1,11 @@
 from django import forms
 from .models import Guest, Medication
-# from users.models import Pharmacist
-# from django_currentuser.middleware import get_current_authenticated_user
+from users.models import Pharmacist
+from django_currentuser.middleware import get_current_authenticated_user
 
 
 class GuestRegisterForm(forms.ModelForm):
-    # dispensing_pharmacist = forms.ChoiceField(widget=forms.Select)
+    dispensing_pharmacist = forms.ChoiceField(widget=forms.Select)
 
     class Meta:
         model = Guest
@@ -14,21 +14,20 @@ class GuestRegisterForm(forms.ModelForm):
             'mobile',
             'insurance_company',
             # 'dispensing_pharmacy',
-            # 'dispensing_pharmacist',
+            'dispensing_pharmacist',
             'dipensing_date',
             'next_dispensing',
         )
 
     def __init__(self, *args, **kwargs):
         # get the current logged in user
-        # user = get_current_authenticated_user()
+        user = get_current_authenticated_user()
         super(GuestRegisterForm, self).__init__(*args, **kwargs)
-        # self.fields['dispensing_pharmacy'].empty_label = 'Select'
 
         # limit pharmacist choices to only logged in user
-        # PHARMACIST_CHOICES = Pharmacist.objects.filter(working_at=user)
-        # self.fields['dispensing_pharmacist'].choices = tuple(
-        #     enumerate(PHARMACIST_CHOICES))
+        PHARMACIST_CHOICES = Pharmacist.objects.filter(working_at=user)
+        self.fields['dispensing_pharmacist'].choices = [
+            (p, p) for p in PHARMACIST_CHOICES]
 
 
 class MedicationForm(forms.ModelForm):

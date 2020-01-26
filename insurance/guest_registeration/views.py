@@ -1,12 +1,15 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views.generic import ListView, CreateView, UpdateView
+from django.contrib.auth.decorators import login_required, permission_required
 from .forms import GuestRegisterForm, MedicationForm
 from .models import Guest, Medication
 
 
-def guest_list(request):
-    context = {'guest_list': Guest.objects.all()}
-    return render(request, 'guest_registeration/guest_list.html', context)
+class GuestList(ListView):
+    model = Guest
+    template_name = 'guest_registeration/guest_list.html'
+    context_object_name = 'guest_list'
 
 
 @login_required
@@ -34,8 +37,11 @@ def guest_register(request, id=0):
 
 @login_required
 def guest_delete(request, id):
-    guest = Guest.objects.get(pk=id)
-    guest.delete()
+    try:
+        guest = Guest.objects.get(dispensing_pharmacy=request.user, pk=id)
+        guest.delete()
+    except:
+        messages.warning(request, 'You are not allowed to delete this guest.')
     return redirect('guest_registeration:guest_list')
 
 

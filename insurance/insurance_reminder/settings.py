@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
     'crispy_forms',
+    'guardian',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,8 @@ PHONENUMBER_DEFAULT_REGION = 'SA'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'guest_registeration:guest_list'
 LOGIN_URL = 'users:login'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # default
+    'guardian.backends.ObjectPermissionBackend',
+)

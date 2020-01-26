@@ -15,4 +15,4 @@ class Pharmacist(models.Model):
     emp_code = models.CharField(max_length=6, verbose_name='Employee Code')
 
     def __str__(self):
-        return self.name + '(' + self.emp_code + ')' + f'(working at {self.working_at})'
+        return self.name + '(' + self.emp_code + ')'

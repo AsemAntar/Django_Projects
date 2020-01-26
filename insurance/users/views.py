@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import CustomRegisterForm, PharmacistForm
 from .models import Pharmacist, Profile
+from guest_registeration.models import Guest
 
 
 def register_users(request):
@@ -21,6 +22,9 @@ def register_users(request):
 
 @login_required
 def profile(request):
+    # get all guests registered by the current user
+    guests = Guest.objects.filter(dispensing_pharmacy=request.user)
+
     # get all pharmacists of the current user
     pharmacists = Pharmacist.objects.filter(working_at=request.user)
     # get the current user
@@ -35,7 +39,7 @@ def profile(request):
         return redirect('users:profile')
     else:
         form = PharmacistForm()
-    return render(request, 'users/profile.html', {'form': form, 'pharmacists': pharmacists})
+    return render(request, 'users/profile.html', {'form': form, 'pharmacists': pharmacists, 'guests': guests})
 
 
 @login_required

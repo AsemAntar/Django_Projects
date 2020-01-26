@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 from users.models import Pharmacist
@@ -14,12 +15,13 @@ class Guest(models.Model):
         ('Saudi Enaya', 'Saudi Enaya'),
     )
     fullname = models.CharField(max_length=250, verbose_name='Full Name')
-    mobile = PhoneNumberField(verbose_name='Mobile No.')
+    mobile = PhoneNumberField(verbose_name='Mobile No.', max_length=15)
     insurance_company = models.CharField(
         max_length=30, choices=INSURANCE_COMPANIES, verbose_name='Insurance Company', default='bupa')
     dipensing_date = models.DateField(verbose_name='Dispensing Date')
     next_dispensing = models.DateField(verbose_name='Next Dispensing Date')
     dispensing_pharmacy = models.ForeignKey(User, on_delete=models.CASCADE)
+    dispensing_pharmacist = models.CharField(max_length=250, blank=True)
 
     def __str__(self):
         return self.fullname
