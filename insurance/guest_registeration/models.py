@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from users.models import Pharmacist
 from phonenumber_field.modelfields import PhoneNumberField
@@ -51,3 +52,19 @@ class Medication(models.Model):
 
     def __str__(self):
         return self.name.upper()
+
+
+class Prescription(models.Model):
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
+
+    dispensing_date = models.DateTimeField(
+        default=timezone.now, verbose_name='Dispensing Date')
+
+    dispensing_period = models.PositiveIntegerField(
+        verbose_name='Duration')
+
+    def calculate_date(self):
+        next_date = timezone.now() + timedelta(days=self.dispensing_period)
+        return next_date
+
+    next_dispensing = models.DateTimeField(default=)
