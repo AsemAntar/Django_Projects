@@ -2,14 +2,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from . import views
+from posts.views import index, blog, post
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('blog/', views.blog, name='blog'),
-    path('post/', views.post, name='post'),
+    path('', index, name='index'),
+    path('blog/', blog, name='blog'),
+    path('post/', post, name='post'),
 ]
 
 if settings.DEBUG:
