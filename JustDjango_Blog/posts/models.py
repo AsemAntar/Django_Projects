@@ -39,6 +39,11 @@ class Post(models.Model):
     # each post could have multiple categories, and each category could be applied to multiple posts
     categories = models.ManyToManyField(Category)
 
+    previous_post = models.ForeignKey(
+        'self', on_delete=models.SET_NULL, blank=True, null=True, related_name='previous')
+    next_post = models.ForeignKey(
+        'self', on_delete=models.SET_NULL, blank=True, null=True, related_name='next')
+
     # if true render the post
     featured = models.BooleanField(default=True)
 

@@ -52,10 +52,6 @@ def blog(request):
     return render(request, 'blog.html', context)
 
 
-def post(request, post_id):
-    return render(request, 'post.html', {})
-
-
 def search(request):
     queryset = Post.objects.all()
     query = request.GET.get('q')
@@ -68,3 +64,15 @@ def search(request):
 
     context = {'queryset': queryset}
     return render(request, 'search_results.html', context)
+
+
+def post(request, post_id):
+    category_count = get_category_count()
+    most_recent = Post.objects.order_by('-timestamp')[:3]
+    post = get_object_or_404(Post, id=post_id)
+    context = {
+        'post': post,
+        'most_recent': most_recent,
+        'category_count': category_count,
+    }
+    return render(request, 'post.html', context)
