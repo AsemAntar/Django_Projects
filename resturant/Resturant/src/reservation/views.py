@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Reservation
+from .forms import ReserveTableForm
 
 
 def reserve_table(request):
-    reservations = Reservation.objects.all()
-    context = {
-        'reservations': reservations,
-    }
+    if request.method == 'POST':
+        reservation_form = ReserveTableForm(request.POST)
+        if reservation_form.is_valid():
+            reservation_form.save()
+    else:
+        reservation_form = ReserveTableForm()
+        return render(request, 'reservation/reservation.html', {
+            'reservation_form': reservation_form,
+        })
 
-    return render(request, 'reservation/reservation.html', context)
+    return redirect('reservation:reserve_table')
