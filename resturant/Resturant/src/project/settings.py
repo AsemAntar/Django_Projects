@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # --------> custom apps <----------
     'meals.apps.MealsConfig',
     'reservation.apps.ReservationConfig',
+    'blog.apps.BlogConfig',
     'crispy_forms',
 ]
 
