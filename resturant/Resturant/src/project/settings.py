@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'reservation.apps.ReservationConfig',
     'blog.apps.BlogConfig',
     'crispy_forms',
+    'taggit',
 ]
 
 MIDDLEWARE = [
