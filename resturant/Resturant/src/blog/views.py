@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
 from django.db.models import Count
 from django.shortcuts import render, redirect
@@ -6,17 +7,30 @@ from.forms import CommentForm
 
 
 def post_list(request):
-    post_list = Post.objects.all()
+    posts = Post.objects.all()
+
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+
+    try:
+        post_list = paginator.page(page_number)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+
     context = {
-        'post_list': post_list
+        'post_list': post_list,
     }
     return render(request, 'blog/post_list.html', context)
 
 
 def post_detail(request, id):
     post_detail = Post.objects.get(id=id)
+
     categories = Category.objects.all().annotate(posts_count=Count('post'))
     all_tags = Tag.objects.all()
+
     comments = Comment.objects.filter(post=post_detail).order_by('-created')
     comments_count = Comment.objects.filter(post=post_detail).count()
 
