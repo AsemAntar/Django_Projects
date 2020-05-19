@@ -37,10 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # --------> custom apps <----------
     'meals.apps.MealsConfig',
     'reservation.apps.ReservationConfig',
     'blog.apps.BlogConfig',
+    'about.apps.AboutConfig',
+
+    # --------> third party apps <----------
     'crispy_forms',
     'taggit',
 ]

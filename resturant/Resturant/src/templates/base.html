@@ -35,7 +35,7 @@
         <div class="site-menu-inner">
           <ul class="list-unstyled">
             <li class="active"><a href="{% url 'meals:meals_list' %}">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
+            <li><a href="{% url 'about:about' %}">About Us</a></li>
             <li><a href="menu.html">Our Menu</a></li>
             <li><a href="{% url 'blog:post_list' %}">Our Blog</a></li>
             <li><a href="{% url 'reservation:reserve_table' %}">Reserve A Table</a></li>
