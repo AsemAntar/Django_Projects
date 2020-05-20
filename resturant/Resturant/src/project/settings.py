@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'reservation.apps.ReservationConfig',
     'blog.apps.BlogConfig',
     'about.apps.AboutConfig',
+    'contact.apps.ContactConfig',
 
     # --------> third party apps <----------
     'crispy_forms',
     'taggit',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Riyadh'
 
 USE_I18N = True
 
@@ -134,3 +136,13 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+PHONENUMBER_DEFAULT_REGION = 'SA'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

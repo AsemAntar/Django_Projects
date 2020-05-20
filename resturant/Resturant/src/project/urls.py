@@ -10,6 +10,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('reserve_table/', include('reservation.urls')),
     path('about/', include('about.urls')),
+    path('contactus/', include('contact.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
