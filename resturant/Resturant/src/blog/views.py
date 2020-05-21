@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from .models import Post, Category, Comment
 from.forms import CommentForm
@@ -8,6 +8,14 @@ from.forms import CommentForm
 
 def post_list(request):
     posts = Post.objects.all()
+
+    # Search
+    search_query = request.GET.get('q')
+    if search_query:
+        posts = posts.filter(Q(title__icontains=search_query)
+                             | Q(content__icontains=search_query)
+                             | Q(tags__name__icontains=search_query)
+                             | Q(categories__name__icontains=search_query)).distinct()
 
     paginator = Paginator(posts, 3)
     page_number = request.GET.get('page')
